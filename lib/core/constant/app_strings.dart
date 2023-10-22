@@ -6,6 +6,7 @@ class AppStrings {
       byCreating = 'By creating an account, you agree to our',
       termsOfService = 'Terms of Service',
       of = 'of',
+      and = ' and ',
       privacyPolicy = 'Privacy Policy',
       phoneVerification = 'Phone Verification',
       enterOtp = 'Enter your OTP code below',
