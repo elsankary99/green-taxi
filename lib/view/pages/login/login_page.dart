@@ -17,7 +17,7 @@ class LoginPage extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         slivers: [
           const SliverToBoxAdapter(child: LoginGreenMask()),
-          const SliverToBoxAdapter(child: TopText()),
+          const SliverToBoxAdapter(child: LoginTopText()),
           SliverToBoxAdapter(child: SizedBox(height: context.height * 0.03)),
           const SliverToBoxAdapter(child: EnterNumberWidget()),
           SliverToBoxAdapter(child: SizedBox(height: context.height * 0.03)),

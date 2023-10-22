@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:green_taxi/core/constant/app_strings.dart';
 import 'package:green_taxi/view/widgets/login_widget/welcome_text.dart';
 
-class LoginTopText extends StatelessWidget {
-  const LoginTopText({
+class OTPTopText extends StatelessWidget {
+  const OTPTopText({
     super.key,
   });
 
@@ -13,8 +13,7 @@ class LoginTopText extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: const WelcomeText(
-          title1: AppStrings.helloNiceToMeetYou,
-          title2: AppStrings.getMovingWithGreenTaxi),
+          title1: AppStrings.phoneVerification, title2: AppStrings.enterOtp),
     );
   }
 }

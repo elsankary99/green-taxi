@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:green_taxi/core/constant/app_colors.dart';
 import 'package:green_taxi/core/constant/app_strings.dart';
 import 'package:green_taxi/core/extension/emdia_query.dart';
+import 'package:green_taxi/core/router/app_router.dart';
 
 class CustomTextFormField extends ConsumerWidget {
   const CustomTextFormField({
@@ -32,7 +34,9 @@ class CustomTextFormField extends ConsumerWidget {
             // },
             decoration: InputDecoration(
                 suffixIcon: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.router.push(const OTPRoute());
+                  },
                   icon: CircleAvatar(
                     backgroundColor: AppColors.green,
                     child: Icon(
