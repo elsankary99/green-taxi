@@ -23,7 +23,7 @@ class OTPPage extends StatelessWidget {
               const LoginGreenMask(),
               Positioned(
                   top: context.height * 0.075,
-                  left: context.width * 0.03,
+                  left: context.width * 0.05,
                   child: const CustomBackButton())
             ],
           )),
