@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:green_taxi/core/router/app_router.dart';
 import 'package:green_taxi/view/pages/splash/splash_page.dart';
 
 class MyApp extends StatelessWidget {
@@ -12,13 +13,9 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (_, child) {
-        return MaterialApp(
+        return MaterialApp.router(
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            textTheme: Typography.englishLike2018.apply(fontSizeFactor: 1.sp),
-          ),
-          home: child,
+          routerConfig: router.config(),
         );
       },
       child: const SplashPage(),
