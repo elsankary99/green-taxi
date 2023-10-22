@@ -1,31 +1,21 @@
-import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:green_taxi/core/extension/emdia_query.dart';
+import 'package:green_taxi/provider/country_code_provider/country_code_provider.dart';
 
-class CountryCodeWidget extends ConsumerStatefulWidget {
+class CountryCodeWidget extends ConsumerWidget {
   const CountryCodeWidget({
     super.key,
   });
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _CountryCodeState();
-}
-
-class _CountryCodeState extends ConsumerState<CountryCodeWidget> {
-  final countryPicker = const FlCountryCodePicker();
-  CountryCode countryCode =
-      const CountryCode(name: "Palestine", code: "Ps", dialCode: "+970");
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final provider = ref.read(countryCodeProvider.notifier);
+    ref.watch(countryCodeProvider);
     return GestureDetector(
       onTap: () async {
-        // Show the country code picker when tapped.
-        final code = await countryPicker.showPicker(context: context);
-        // Null check
-        if (code != null) countryCode = code;
+        provider.selectCountry(context);
       },
       child: Container(
         height: 45.h,
@@ -36,13 +26,13 @@ class _CountryCodeState extends ConsumerState<CountryCodeWidget> {
           SizedBox(width: context.width * 0.01),
           SizedBox(
             width: context.width * 0.07,
-            child: Image.asset(countryCode.flagUri,
-                package: countryCode.flagImagePackage),
+            child: Image.asset(provider.countryCode.flagUri,
+                package: provider.countryCode.flagImagePackage),
           ),
           SizedBox(width: context.width * 0.01),
           Expanded(
             child: Text(
-              countryCode.dialCode,
+              provider.countryCode.dialCode,
               style: TextStyle(fontSize: 11.sp, fontWeight: FontWeight.w600),
             ),
           ),
