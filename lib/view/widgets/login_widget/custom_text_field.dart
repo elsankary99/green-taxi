@@ -6,6 +6,9 @@ import 'package:green_taxi/core/constant/app_colors.dart';
 import 'package:green_taxi/core/constant/app_strings.dart';
 import 'package:green_taxi/core/extension/emdia_query.dart';
 import 'package:green_taxi/core/router/app_router.dart';
+import 'package:green_taxi/core/widget/custom_circle_indicator.dart';
+import 'package:green_taxi/core/widget/custom_toast.dart';
+import 'package:green_taxi/provider/login_provider/login_provider.dart';
 
 class CustomTextFormField extends ConsumerWidget {
   const CustomTextFormField({
@@ -14,47 +17,73 @@ class CustomTextFormField extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Row(
-      children: [
-        SizedBox(width: context.width * 0.02),
-        Expanded(
-          child: TextFormField(
-            keyboardType: TextInputType.phone,
-            // validator: (value) {
-            //   if (value!.trim().isEmpty) {
-            //     return AppStrings.pleaseEnterYourPhoneErr;
-            //   }
-            //   if (value.trim().length < 11) {
-            //     return AppStrings.phoneNumberDigitErr;
-            //   }
-            //   return null;
-            // },
-            // onSaved: (phoneNumber) {
-            //   provider.phoneNumber = phoneNumber!.trim();
-            // },
-            decoration: InputDecoration(
-                suffixIcon: IconButton(
-                  onPressed: () {
-                    context.router.push(const OTPRoute());
-                  },
-                  icon: CircleAvatar(
-                    backgroundColor: AppColors.green,
-                    child: Icon(
-                      Icons.arrow_forward_rounded,
-                      color: AppColors.white,
-                      size: 20.sp,
-                    ),
+    final provider = ref.read(loginProvider.notifier);
+    final state = ref.watch(loginProvider);
+    ref.listen(
+      loginProvider,
+      (previous, next) {
+        if (next is PhoneNumberSubmitted) {
+          context.router.push(const OTPRoute());
+          customToast(title: "We Send Sms Code To your Number");
+        }
+        if (next is LoginError) {
+          customToast(title: next.message, color: Colors.red);
+        }
+      },
+    );
+    return Form(
+      key: provider.loginFormKey,
+      child: Row(
+        children: [
+          SizedBox(width: context.width * 0.02),
+          Expanded(
+            child: TextFormField(
+              keyboardType: TextInputType.phone,
+              validator: (value) {
+                if (value!.trim().isEmpty) {
+                  return AppStrings.pleaseEnterYourPhoneErr;
+                }
+                if (value.trim().length < 10) {
+                  return AppStrings.phoneNumberDigitErr;
+                }
+                return null;
+              },
+              onSaved: (phoneNumber) {
+                provider.phoneNumber = phoneNumber!.trim();
+              },
+              decoration: InputDecoration(
+                  suffixIcon: state is LoginLoading
+                      ? SizedBox(
+                          width: 25.w,
+                          child: const CustomCircleIndicator(
+                            color: AppColors.green,
+                          ),
+                        )
+                      : IconButton(
+                          onPressed: () async {
+                            await provider.verifyPhoneNumber();
+                          },
+                          icon: CircleAvatar(
+                            backgroundColor: AppColors.green,
+                            child: Icon(
+                              Icons.arrow_forward_rounded,
+                              color: AppColors.white,
+                              size: 20.sp,
+                            ),
+                          ),
+                        ),
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 14.h,
                   ),
-                ),
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 14.h,
-                ),
-                hintText: AppStrings.enterMobileNumber,
-                border: const OutlineInputBorder()),
+                  hintText: AppStrings.enterMobileNumber,
+                  focusedBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(color: AppColors.green, width: 2)),
+                  border: const OutlineInputBorder()),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

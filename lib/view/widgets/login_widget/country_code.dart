@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:green_taxi/core/extension/emdia_query.dart';
 import 'package:green_taxi/provider/country_code_provider/country_code_provider.dart';
+import 'package:green_taxi/provider/login_provider/login_provider.dart';
 
 class CountryCodeWidget extends ConsumerWidget {
   const CountryCodeWidget({
@@ -13,6 +14,8 @@ class CountryCodeWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.read(countryCodeProvider.notifier);
     ref.watch(countryCodeProvider);
+    ref.read(loginProvider.notifier).countryCode =
+        provider.countryCode.dialCode;
     return GestureDetector(
       onTap: () async {
         provider.selectCountry(context);
