@@ -7,6 +7,7 @@ class AppStrings {
       enterMobileNumber = 'Enter your mobile number',
       byCreating = 'By creating an account, you agree to our',
       termsOfService = 'Terms of Service',
+      fieldRequired = 'This field is required',
       of = 'of',
       name = 'Name',
       homeAddress = 'Home Address',

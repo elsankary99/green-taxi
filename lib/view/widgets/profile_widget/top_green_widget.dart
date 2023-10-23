@@ -18,14 +18,14 @@ class TopGreenWidget extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            height: context.height * 0.25,
+            height: context.height * 0.27,
             width: context.width,
             decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage(Assets.assetsImagesMask),
                     fit: BoxFit.fill)),
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            child: Column(children: [
+              SizedBox(height: context.height * 0.08),
               Text(
                 AppStrings.profileSettings,
                 style:
