@@ -6,10 +6,7 @@ import 'package:green_taxi/core/constant/app_text_style.dart';
 import 'package:green_taxi/core/extension/emdia_query.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({
-    super.key,
-    this.onPressed,
-  });
+  const CustomButton({super.key, this.onPressed});
   final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {

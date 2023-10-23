@@ -8,7 +8,7 @@ class ProfileInitial extends ProfileState {}
 
 class ProfileLoading extends ProfileState {}
 
-class ProfileDataFetched extends ProfileState {}
+class ProfileAddedSuccessfully extends ProfileState {}
 
 class ProfileError extends ProfileState {
   final String message;

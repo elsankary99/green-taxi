@@ -10,6 +10,8 @@ class UploadImageLoading extends UploadImageState {}
 
 class UploadImageSuccess extends UploadImageState {}
 
+class NotSelectedImage extends UploadImageState {}
+
 class UploadImageError extends UploadImageState {
   final String message;
   const UploadImageError(this.message);
