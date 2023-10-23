@@ -20,4 +20,13 @@ class AppTextStyle {
       fontFamily: "Poppins",
     );
   }
+
+  static TextStyle get poppinsRegular14 {
+    return TextStyle(
+      fontSize: 14.sp,
+      color: AppColors.darkGrey,
+      fontWeight: FontWeight.w400,
+      fontFamily: "Poppins",
+    );
+  }
 }

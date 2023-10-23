@@ -1,5 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:green_taxi/core/constant/app_colors.dart';
+import 'package:green_taxi/core/extension/emdia_query.dart';
+import 'package:green_taxi/view/widgets/profile_widget/custom_button.dart';
+import 'package:green_taxi/view/widgets/profile_widget/profile_form.dart';
+import 'package:green_taxi/view/widgets/profile_widget/top_green_widget.dart';
 
 @RoutePage()
 class ProfilePage extends StatelessWidget {
@@ -7,6 +12,20 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+      backgroundColor: AppColors.white,
+      body: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
+        slivers: [
+          const SliverToBoxAdapter(child: TopGreenWidget()),
+          SliverToBoxAdapter(child: SizedBox(height: context.height * 0.03)),
+          const SliverToBoxAdapter(child: ProfileForm()),
+          SliverToBoxAdapter(
+              child: CustomButton(
+            onPressed: () {},
+          )),
+        ],
+      ),
+    );
   }
 }
