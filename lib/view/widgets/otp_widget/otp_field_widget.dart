@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:green_taxi/core/constant/app_colors.dart';
+import 'package:green_taxi/provider/login_provider/login_provider.dart';
 import 'package:pinput/pinput.dart';
 
 class OtpFieldWidget extends ConsumerWidget {
@@ -9,6 +10,7 @@ class OtpFieldWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final provider = ref.read(loginProvider.notifier);
     final defaultPinTheme = PinTheme(
       width: 50.w,
       height: 56.h,
@@ -39,11 +41,16 @@ class OtpFieldWidget extends ConsumerWidget {
         submittedPinTheme: submittedPinTheme,
         length: 6,
         validator: (s) {
-          return s == '222222' ? null : 'Pin is incorrect';
+          return s!.trim().length < 6 ? 'Pin is incorrect' : null;
         },
         pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
         showCursor: true,
-        onCompleted: (pin) => print(pin),
+        onChanged: (value) {
+          provider.smsCode = value.trim();
+        },
+        onCompleted: (pin) async {
+          await provider.submitOtpCode();
+        },
       ),
     );
   }

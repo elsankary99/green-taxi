@@ -21,13 +21,13 @@ class LoginProvider extends StateNotifier<LoginState> {
       loginFormKey.currentState!.save();
       log(countryCode! + phoneNumber!);
       state = LoginLoading();
-      // await FirebaseAuth.instance.verifyPhoneNumber(
-      //   phoneNumber: countryCode! + phoneNumber!,
-      //   verificationCompleted: (PhoneAuthCredential credential) {},
-      //   verificationFailed: verificationFailed,
-      //   codeSent: codeSent,
-      //   codeAutoRetrievalTimeout: (String verificationId) {},
-      // );
+      await FirebaseAuth.instance.verifyPhoneNumber(
+        phoneNumber: countryCode! + phoneNumber!,
+        verificationCompleted: (PhoneAuthCredential credential) {},
+        verificationFailed: verificationFailed,
+        codeSent: codeSent,
+        codeAutoRetrievalTimeout: (String verificationId) {},
+      );
     }
   }
 
@@ -51,6 +51,7 @@ class LoginProvider extends StateNotifier<LoginState> {
 
   Future<void> submitOtpCode() async {
     state = OtpLoading();
+    log(smsCode!);
     try {
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
           verificationId: verificationId, smsCode: smsCode!);
