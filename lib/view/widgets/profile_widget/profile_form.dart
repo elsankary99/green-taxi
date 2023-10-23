@@ -21,14 +21,28 @@ class ProfileForm extends ConsumerWidget {
           key: provider.profileFormKey,
           child: Column(
             children: [
-              const CustomTextField(
-                  icon: FontAwesomeIcons.solidUser, title: AppStrings.name),
-              const CustomTextField(
-                  icon: FontAwesomeIcons.house, title: AppStrings.homeAddress),
-              const CustomTextField(
+              CustomTextField(
+                  onSaved: (name) {
+                    provider.name = name;
+                  },
+                  icon: FontAwesomeIcons.solidUser,
+                  title: AppStrings.name),
+              CustomTextField(
+                  onSaved: (homeAddress) {
+                    provider.homeAddress = homeAddress;
+                  },
+                  icon: FontAwesomeIcons.house,
+                  title: AppStrings.homeAddress),
+              CustomTextField(
+                  onSaved: (businessAddress) {
+                    provider.businessAddress = businessAddress;
+                  },
                   icon: FontAwesomeIcons.briefcase,
                   title: AppStrings.businessAddress),
-              const CustomTextField(
+              CustomTextField(
+                  onSaved: (shoppingCenter) {
+                    provider.shoppingCenter = shoppingCenter;
+                  },
                   icon: FontAwesomeIcons.cartShopping,
                   title: AppStrings.shoppingCenter),
               SizedBox(height: context.height * 0.045)

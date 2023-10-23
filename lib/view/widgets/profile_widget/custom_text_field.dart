@@ -9,9 +9,11 @@ class CustomTextField extends StatelessWidget {
     super.key,
     required this.title,
     required this.icon,
+    this.onSaved,
   });
   final String title;
   final IconData icon;
+  final void Function(String?)? onSaved;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -29,6 +31,7 @@ class CustomTextField extends StatelessWidget {
             }
             return null;
           },
+          onSaved: onSaved,
           cursorColor: AppColors.green,
           style: AppTextStyle.poppinsRegular14,
           decoration: InputDecoration(

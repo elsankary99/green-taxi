@@ -1,5 +1,6 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -21,6 +22,11 @@ class ProfileProvider extends StateNotifier<ProfileState> {
   Future<void> addingUserData() async {
     if (profileFormKey.currentState!.validate()) {
       profileFormKey.currentState!.save();
+      log("name : ${name!}");
+      log("homeAddress : ${homeAddress!}");
+      log("businessAddress : ${businessAddress!}");
+      log("shoppingCenter : ${shoppingCenter!}");
+      log("imageUrl : $imageUrl ");
       // try {
       //   await users.doc(FirebaseAuth.instance.currentUser!.uid).set(
       //     {

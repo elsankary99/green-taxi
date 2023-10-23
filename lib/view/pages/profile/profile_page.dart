@@ -24,8 +24,8 @@ class ProfilePage extends ConsumerWidget {
           SliverToBoxAdapter(child: SizedBox(height: context.height * 0.03)),
           const SliverToBoxAdapter(child: ProfileForm()),
           SliverToBoxAdapter(child: CustomButton(
-            onPressed: () {
-              provider.addingUserData();
+            onPressed: () async {
+              await provider.addingUserData();
             },
           )),
           SliverToBoxAdapter(child: SizedBox(height: context.height * 0.04))
