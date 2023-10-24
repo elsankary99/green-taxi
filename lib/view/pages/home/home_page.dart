@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:green_taxi/view/widgets/home_widget/top_home_widget.dart';
 
 @RoutePage()
 class HomePage extends StatefulWidget {
@@ -33,13 +34,18 @@ class MapSampleState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GoogleMap(
-        zoomControlsEnabled: false,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller = controller;
-          _controller!.setMapStyle(_mapStyle);
-        },
+      body: Stack(
+        children: [
+          GoogleMap(
+            zoomControlsEnabled: false,
+            initialCameraPosition: _kGooglePlex,
+            onMapCreated: (GoogleMapController controller) {
+              _controller = controller;
+              _controller!.setMapStyle(_mapStyle);
+            },
+          ),
+          const Positioned(top: 0, child: TopHomeWidget())
+        ],
       ),
     );
   }

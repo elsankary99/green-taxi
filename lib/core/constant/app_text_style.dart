@@ -12,11 +12,29 @@ class AppTextStyle {
     );
   }
 
+  static TextStyle get poppinsBold20 {
+    return TextStyle(
+      fontSize: 20.sp,
+      color: AppColors.black,
+      fontWeight: FontWeight.bold,
+      fontFamily: "Poppins",
+    );
+  }
+
   static TextStyle get poppinsRegular12 {
     return TextStyle(
       fontSize: 12.sp,
       color: AppColors.black,
       fontWeight: FontWeight.w400,
+      fontFamily: "Poppins",
+    );
+  }
+
+  static TextStyle get poppinsBold12 {
+    return TextStyle(
+      fontSize: 12.sp,
+      color: AppColors.green,
+      fontWeight: FontWeight.bold,
       fontFamily: "Poppins",
     );
   }

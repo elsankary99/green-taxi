@@ -8,6 +8,8 @@ class AppStrings {
       byCreating = 'By creating an account, you agree to our',
       termsOfService = 'Terms of Service',
       fieldRequired = 'This field is required',
+      goodMorning = 'Good Morning.  ',
+      whereAreYouGoing = 'Where are you going?',
       of = 'of',
       name = 'Name',
       homeAddress = 'Home Address',
