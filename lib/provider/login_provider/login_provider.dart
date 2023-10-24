@@ -23,10 +23,11 @@ class LoginProvider extends StateNotifier<LoginState> {
       state = LoginLoading();
       await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: countryCode! + phoneNumber!,
+        timeout: const Duration(seconds: 15),
         verificationCompleted: (PhoneAuthCredential credential) {},
         verificationFailed: verificationFailed,
         codeSent: codeSent,
-        codeAutoRetrievalTimeout: (String verificationId) {},
+        codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
       );
     }
   }
@@ -37,6 +38,8 @@ class LoginProvider extends StateNotifier<LoginState> {
       log('The provided phone number is not valid.');
       state = const LoginError('The provided phone number is not valid.');
     } else {
+      log(e.toString());
+
       state = LoginError(e.toString());
     }
   }
@@ -49,6 +52,15 @@ class LoginProvider extends StateNotifier<LoginState> {
     this.verificationId = verificationId;
   }
 
+  Future<void> verificationCompleted(PhoneAuthCredential credential) async {
+    log("verificationCompleted==");
+    await signIn(credential);
+  }
+
+  void codeAutoRetrievalTimeout(String verificationId) {
+    log("codeAutoRetrievalTimeout");
+  }
+
   Future<void> submitOtpCode() async {
     state = OtpLoading();
     log(smsCode!);
@@ -56,10 +68,28 @@ class LoginProvider extends StateNotifier<LoginState> {
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
           verificationId: verificationId, smsCode: smsCode!);
 
+      await signIn(credential);
+    } catch (e) {
+      state = LoginError(e.toString());
+    }
+  }
+
+  Future<void> signIn(PhoneAuthCredential credential) async {
+    log("signIn *&*&");
+
+    try {
       await FirebaseAuth.instance.signInWithCredential(credential);
       state = OtpCodeSubmitted();
     } catch (e) {
       state = LoginError(e.toString());
     }
+  }
+
+  Future<void> logOut() async {
+    await FirebaseAuth.instance.signOut();
+  }
+
+  User get getLoggedInUser {
+    return FirebaseAuth.instance.currentUser!;
   }
 }

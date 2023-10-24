@@ -3,6 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:green_taxi/core/constant/app_colors.dart';
 import 'package:green_taxi/core/extension/emdia_query.dart';
+import 'package:green_taxi/core/router/app_router.dart';
 import 'package:green_taxi/core/widget/custom_circle_indicator.dart';
 import 'package:green_taxi/core/widget/custom_toast.dart';
 import 'package:green_taxi/provider/profile_provider/profile_provider.dart';
@@ -26,7 +27,11 @@ class ProfilePage extends ConsumerWidget {
         if (next is ProfileError) {
           customToast(title: next.message, color: Colors.red);
         }
+        if (next is NullImage) {
+          customTopToast(context, message: "Please Enter Your Profile Image");
+        }
         if (next is ProfileAddedSuccessfully) {
+          context.router.replace(const HomeRoute());
           customToast(title: "Successfully Added");
         }
       },

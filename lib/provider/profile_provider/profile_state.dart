@@ -10,6 +10,8 @@ class ProfileLoading extends ProfileState {}
 
 class ProfileAddedSuccessfully extends ProfileState {}
 
+class NullImage extends ProfileState {}
+
 class ProfileError extends ProfileState {
   final String message;
   const ProfileError(this.message);

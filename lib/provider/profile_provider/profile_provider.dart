@@ -21,24 +21,29 @@ class ProfileProvider extends StateNotifier<ProfileState> {
 
   Future<void> addingUserData() async {
     if (profileFormKey.currentState!.validate()) {
-      profileFormKey.currentState!.save();
-      state = ProfileLoading();
-      log("ProfileLoading");
-      try {
-        await users.doc().set(
-          {
-            "image_url": imageUrl,
-            "name": name,
-            "home_address": homeAddress,
-            "business_address": businessAddress,
-            "shopping_center": shoppingCenter,
-          },
-        );
-        log("ProfileAddedSuccessfully");
-        state = ProfileAddedSuccessfully();
-      } catch (e) {
-        state = ProfileError(e.toString());
-        log("Profile ${e.toString()}");
+      if (imageUrl != null) {
+        profileFormKey.currentState!.save();
+        state = ProfileLoading();
+        log("ProfileLoading");
+        try {
+          //Todo (1)::FirebaseAuth.instance.currentUser!.uid
+          await users.doc("54asdsad35sdasca3sd54").set(
+            {
+              "image_url": imageUrl,
+              "name": name,
+              "home_address": homeAddress,
+              "business_address": businessAddress,
+              "shopping_center": shoppingCenter,
+            },
+          );
+          log("ProfileAddedSuccessfully");
+          state = ProfileAddedSuccessfully();
+        } catch (e) {
+          state = ProfileError(e.toString());
+          log("Profile ${e.toString()}");
+        }
+      } else {
+        state = NullImage();
       }
     }
   }

@@ -56,7 +56,8 @@ class ProfileImage extends ConsumerWidget {
                 shape: BoxShape.circle,
                 image: provider.file != null
                     ? DecorationImage(
-                        image: FileImage(provider.file!), fit: BoxFit.fill)
+                        image: NetworkImage(provider.imageUrl!),
+                        fit: BoxFit.cover)
                     : null),
             child: state is UploadImageLoading
                 ? const CustomCircleIndicator(
