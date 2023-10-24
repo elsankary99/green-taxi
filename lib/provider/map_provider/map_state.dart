@@ -14,3 +14,5 @@ class MapError extends MapState {
   final String message;
   const MapError(this.message);
 }
+
+class MoveToMyLocation extends MapState {}
