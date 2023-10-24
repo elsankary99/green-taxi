@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -26,8 +27,7 @@ class ProfileProvider extends StateNotifier<ProfileState> {
         state = ProfileLoading();
         log("ProfileLoading");
         try {
-          //Todo (1)::FirebaseAuth.instance.currentUser!.uid
-          await users.doc("54asdsad35sdasca3sd54").set(
+          await users.doc(FirebaseAuth.instance.currentUser!.uid).set(
             {
               "image_url": imageUrl,
               "name": name,

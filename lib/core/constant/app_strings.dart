@@ -1,5 +1,5 @@
 class AppStrings {
-  static const kGoogleApiKey = "YOUR-Map-KEy",
+  static const kGoogleApiKey = "AIzaSyBlDiz9uyftnzTJHC7WzOBsmGwIrvvTC4M",
       helloNiceToMeetYou = 'Hello, nice to meet you!',
       getMovingWithGreenTaxi = 'Get moving with Green Taxi',
       pleaseEnterYourPhoneErr = "Please Enter your Phone Number",
