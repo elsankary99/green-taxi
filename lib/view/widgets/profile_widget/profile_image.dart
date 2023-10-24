@@ -23,10 +23,10 @@ class ProfileImage extends ConsumerWidget {
       uploadImageProvider,
       (previous, next) {
         if (next is UploadImageError) {
-          customToast(title: next.message, color: Colors.red);
+          Toast.errorToast(context, message: next.message);
         }
         if (next is UploadImageSuccess) {
-          customToast(title: "Image Added Successfully");
+          Toast.successToast(context, message: "Image Added Successfully");
         }
         if (next is UploadImageLoading) {
           context.router.pop();
@@ -52,7 +52,13 @@ class ProfileImage extends ConsumerWidget {
             width: context.width * 0.35,
             decoration: BoxDecoration(
                 color: AppColors.grey,
-                boxShadow: const [BoxShadow()],
+                boxShadow: const [
+                  BoxShadow(
+                    color: AppColors.green,
+                    blurStyle: BlurStyle.outer,
+                    blurRadius: 5,
+                  )
+                ],
                 shape: BoxShape.circle,
                 image: provider.file != null
                     ? DecorationImage(

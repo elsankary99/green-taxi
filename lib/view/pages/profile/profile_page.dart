@@ -25,14 +25,14 @@ class ProfilePage extends ConsumerWidget {
       profileProvider,
       (previous, next) {
         if (next is ProfileError) {
-          customToast(title: next.message, color: Colors.red);
+          Toast.errorToast(context, message: next.message);
         }
         if (next is NullImage) {
-          customTopToast(context, message: "Please Enter Your Profile Image");
+          Toast.errorToast(context, message: "Please Enter Your Profile Image");
         }
         if (next is ProfileAddedSuccessfully) {
           context.router.replace(const HomeRoute());
-          customToast(title: "Successfully Added");
+          Toast.successToast(context, message: "Successfully Added");
         }
       },
     );

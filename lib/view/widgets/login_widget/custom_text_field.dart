@@ -24,10 +24,11 @@ class CustomTextFormField extends ConsumerWidget {
       (previous, next) {
         if (next is PhoneNumberSubmitted) {
           context.router.push(const OTPRoute());
-          customToast(title: "We Send Sms Code To your Number");
+          Toast.successToast(context,
+              message: "We Send Sms Code To your Number");
         }
         if (next is LoginError) {
-          customToast(title: next.message, color: Colors.red);
+          Toast.errorToast(context, message: next.message);
         }
       },
     );

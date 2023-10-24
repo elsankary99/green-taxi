@@ -24,10 +24,12 @@ class OTPPage extends ConsumerWidget {
       loginProvider,
       (previous, next) {
         if (next is LoginError) {
-          customToast(title: next.message, color: Colors.red);
+          Toast.errorToast(context, message: next.message);
         }
         if (next is OtpCodeSubmitted) {
-          customToast(title: "Your Number Added Successfully");
+          Toast.successToast(context,
+              message: "Your Number Added Successfully");
+
           context.router.replaceAll([const ProfileRoute()]);
         }
       },
