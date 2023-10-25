@@ -18,6 +18,7 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.read(mapProvider.notifier);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       key: provider.scaffoldKey,
       drawer: const HomeDrawerWidget(),
       body: Stack(
@@ -25,17 +26,13 @@ class HomePage extends ConsumerWidget {
         children: [
           const BuildMap(),
           const Positioned(top: 0, child: TopHomeWidget()),
-          // Positioned(
-          //     top: context.height * 0.2,
-          //     left: 0,
-          //     right: 0,
-          //     child: const SearchForLocation()),
           Positioned(
               bottom: context.height * 0.08,
               left: 0,
               right: 0,
               child: const BottomHomeWidget()),
-          const Positioned(child: BottomSheetIcon())
+          const Positioned(child: BottomSheetIcon()),
+          const SearchForLocation(),
         ],
       ),
     );
