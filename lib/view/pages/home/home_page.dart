@@ -7,6 +7,7 @@ import 'package:green_taxi/view/widgets/home_widget/bottom_home_widget.dart';
 import 'package:green_taxi/view/widgets/home_widget/bottom_sheet_icon.dart';
 import 'package:green_taxi/view/widgets/home_widget/build_map.dart';
 import 'package:green_taxi/view/widgets/home_widget/home_drawer.dart';
+import 'package:green_taxi/view/widgets/home_widget/search_for_location.dart';
 import 'package:green_taxi/view/widgets/home_widget/top_home_widget.dart';
 
 @RoutePage()
@@ -20,9 +21,15 @@ class HomePage extends ConsumerWidget {
       key: provider.scaffoldKey,
       drawer: const HomeDrawerWidget(),
       body: Stack(
+        fit: StackFit.expand,
         children: [
           const BuildMap(),
           const Positioned(top: 0, child: TopHomeWidget()),
+          // Positioned(
+          //     top: context.height * 0.2,
+          //     left: 0,
+          //     right: 0,
+          //     child: const SearchForLocation()),
           Positioned(
               bottom: context.height * 0.08,
               left: 0,

@@ -22,5 +22,6 @@ class AppStrings {
       phoneVerification = 'Phone Verification',
       enterOtp = 'Enter your OTP code below',
       resendCode = 'Resend code in',
+      searchForDestination = 'Search for a destination',
       seconds = 'seconds';
 }

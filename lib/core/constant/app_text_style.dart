@@ -47,4 +47,13 @@ class AppTextStyle {
       fontFamily: "Poppins",
     );
   }
+
+  static TextStyle get poppinsBold16 {
+    return TextStyle(
+      fontSize: 16.sp,
+      color: AppColors.black,
+      fontWeight: FontWeight.bold,
+      fontFamily: "Poppins",
+    );
+  }
 }

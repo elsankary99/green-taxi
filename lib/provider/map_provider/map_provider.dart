@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:green_taxi/core/helper/location_helper.dart';
+import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
 
 part 'map_state.dart';
 
@@ -14,6 +15,7 @@ final mapProvider =
 class MapProvider extends StateNotifier<MapState> {
   MapProvider() : super(MapInitial());
   String? mapStyle;
+  FloatingSearchBarController controller = FloatingSearchBarController();
 
   Completer<GoogleMapController> mapController =
       Completer<GoogleMapController>();
