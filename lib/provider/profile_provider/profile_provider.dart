@@ -4,8 +4,20 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:green_taxi/data/model/user_model.dart';
 
 part 'profile_state.dart';
+
+final getUserDataProvider = FutureProvider<UserModel>((ref) async {
+  //TODO: add uid
+  // final uid = FirebaseAuth.instance.currentUser!.uid;
+  final user = await FirebaseFirestore.instance
+      .collection('users')
+      .doc("wVUePRhgfdctKXZNjJrB4c020P83")
+      .get();
+  final data = user.data();
+  return UserModel.fromJson(data!);
+});
 
 final profileProvider = StateNotifierProvider<ProfileProvider, ProfileState>(
     (ref) => ProfileProvider());
