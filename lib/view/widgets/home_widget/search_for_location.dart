@@ -4,7 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:green_taxi/core/constant/app_colors.dart';
 import 'package:green_taxi/core/constant/app_strings.dart';
 import 'package:green_taxi/core/constant/app_text_style.dart';
-import 'package:green_taxi/core/extension/emdia_query.dart';
+import 'package:green_taxi/core/widget/custom_circle_indicator.dart';
+import 'package:green_taxi/data/model/auto_complete_model/auto_complete_model.dart';
+import 'package:green_taxi/provider/auto_complete_provider/auto_complete_provider.dart';
 import 'package:green_taxi/provider/map_provider/map_provider.dart';
 import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
 
@@ -33,7 +35,9 @@ class SearchForLocation extends ConsumerWidget {
       openAxisAlignment: 0.0,
       width: isPortrait ? 600 : 500,
       debounceDelay: const Duration(milliseconds: 500),
-      onQueryChanged: (query) {},
+      onQueryChanged: (query) {
+        ref.read(inputProvider.notifier).state = query;
+      },
       // Specify a custom transition to be used for
       // animating between opened and closed stated.
       transition: CircularFloatingSearchBarTransition(),
@@ -59,23 +63,49 @@ class SearchForLocation extends ConsumerWidget {
             elevation: 4.0,
             child: Column(
               children: [
-                ListView.builder(
-                  padding: EdgeInsets.zero,
-                  physics: const ClampingScrollPhysics(),
-                  itemCount: 10,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      width: context.width,
-                      color: Colors.red,
-                    );
-                  },
-                ),
+                ref.watch(autoCompleteProvider).when(
+                      data: (data) => ListView.builder(
+                        padding: EdgeInsets.zero,
+                        physics: const ClampingScrollPhysics(),
+                        itemCount: data.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return SearchedPlaceWidget(data: data[index]);
+                        },
+                      ),
+                      error: (error, _) => Center(
+                          child: Text(
+                        error.toString(),
+                        style: AppTextStyle.poppinsBold12
+                            .copyWith(color: Colors.red),
+                      )),
+                      loading: () => const CustomCircleIndicator(
+                        color: AppColors.green,
+                      ),
+                    ),
               ],
             ),
           ),
         );
       },
+    );
+  }
+}
+
+class SearchedPlaceWidget extends StatelessWidget {
+  const SearchedPlaceWidget({
+    super.key,
+    required this.data,
+  });
+  final AutoCompleteModel data;
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(
+        data.description!,
+        style: AppTextStyle.poppinsBold14,
+      ),
+      shape: const Border(bottom: BorderSide(color: AppColors.grey, width: 2)),
     );
   }
 }
