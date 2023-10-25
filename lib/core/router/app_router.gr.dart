@@ -27,16 +27,22 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const LoginPage(),
       );
     },
+    MyProfileRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const MyProfilePage(),
+      );
+    },
     OTPRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const OTPPage(),
       );
     },
-    ProfileRoute.name: (routeData) {
+    ProfileSettingRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const ProfilePage(),
+        child: const ProfileSettingPage(),
       );
     },
     SplashRoute.name: (routeData) {
@@ -77,6 +83,20 @@ class LoginRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [MyProfilePage]
+class MyProfileRoute extends PageRouteInfo<void> {
+  const MyProfileRoute({List<PageRouteInfo>? children})
+      : super(
+          MyProfileRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'MyProfileRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [OTPPage]
 class OTPRoute extends PageRouteInfo<void> {
   const OTPRoute({List<PageRouteInfo>? children})
@@ -91,15 +111,15 @@ class OTPRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [ProfilePage]
-class ProfileRoute extends PageRouteInfo<void> {
-  const ProfileRoute({List<PageRouteInfo>? children})
+/// [ProfileSettingPage]
+class ProfileSettingRoute extends PageRouteInfo<void> {
+  const ProfileSettingRoute({List<PageRouteInfo>? children})
       : super(
-          ProfileRoute.name,
+          ProfileSettingRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'ProfileRoute';
+  static const String name = 'ProfileSettingRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

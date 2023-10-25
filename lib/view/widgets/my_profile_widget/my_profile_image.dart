@@ -10,8 +10,8 @@ import 'package:green_taxi/core/widget/custom_toast.dart';
 import 'package:green_taxi/provider/uplead_image_provider/upload_image_provider.dart';
 import 'package:image_picker/image_picker.dart';
 
-class ProfileSettingImage extends ConsumerWidget {
-  const ProfileSettingImage({
+class MyProfileImage extends ConsumerWidget {
+  const MyProfileImage({
     super.key,
   });
 

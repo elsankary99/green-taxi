@@ -30,7 +30,7 @@ class OTPPage extends ConsumerWidget {
           Toast.successToast(context,
               message: "Your Number Added Successfully");
 
-          context.router.replaceAll([const ProfileRoute()]);
+          context.router.replaceAll([const ProfileSettingRoute()]);
         }
       },
     );

@@ -20,6 +20,7 @@ class AppStrings {
       submit = 'Submit',
       and = ' and ',
       profileSettings = 'Profile Settings',
+      myProfile = 'My Profile',
       privacyPolicy = 'Privacy Policy',
       phoneVerification = 'Phone Verification',
       enterOtp = 'Enter your OTP code below',

@@ -4,10 +4,11 @@ import 'package:green_taxi/core/constant/app_images.dart';
 import 'package:green_taxi/core/constant/app_strings.dart';
 import 'package:green_taxi/core/constant/app_text_style.dart';
 import 'package:green_taxi/core/extension/emdia_query.dart';
-import 'package:green_taxi/view/widgets/profile_widget/profile_image.dart';
+import 'package:green_taxi/view/widgets/my_profile_widget/my_profile_image.dart';
+import 'package:green_taxi/view/widgets/otp_widget/custom_back_button.dart';
 
-class TopGreenWidget extends StatelessWidget {
-  const TopGreenWidget({
+class TopGreenProfile extends StatelessWidget {
+  const TopGreenProfile({
     super.key,
   });
 
@@ -27,13 +28,17 @@ class TopGreenWidget extends StatelessWidget {
             child: Column(children: [
               SizedBox(height: context.height * 0.08),
               Text(
-                AppStrings.profileSettings,
+                AppStrings.myProfile,
                 style:
                     AppTextStyle.poppinsBold24.copyWith(color: AppColors.white),
               )
             ]),
           ),
-          const ProfileSettingImage()
+          Positioned(
+              top: context.height * 0.075,
+              left: context.width * 0.05,
+              child: const CustomBackButton()),
+          const MyProfileImage()
         ],
       ),
     );

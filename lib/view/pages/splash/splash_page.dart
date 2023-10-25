@@ -29,7 +29,7 @@ class _SplashPageState extends State<SplashPage> {
         if (profile.exists) {
           router.replace(const HomeRoute());
         } else {
-          router.replace(const ProfileRoute());
+          router.replace(const ProfileSettingRoute());
         }
       } else {
         router.replace(const LoginRoute());

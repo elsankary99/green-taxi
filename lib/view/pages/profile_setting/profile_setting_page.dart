@@ -13,8 +13,8 @@ import 'package:green_taxi/view/widgets/profile_widget/profile_form.dart';
 import 'package:green_taxi/view/widgets/profile_widget/top_green_widget.dart';
 
 @RoutePage()
-class ProfilePage extends ConsumerWidget {
-  const ProfilePage({super.key});
+class ProfileSettingPage extends ConsumerWidget {
+  const ProfileSettingPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

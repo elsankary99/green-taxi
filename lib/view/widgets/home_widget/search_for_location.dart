@@ -109,7 +109,3 @@ class SearchedPlaceWidget extends StatelessWidget {
     );
   }
 }
-// SearchBarWidget(
-//         title: AppStrings.searchForDestination,
-//         onTap: () async {},
-//       ),
