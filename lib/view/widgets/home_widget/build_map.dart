@@ -1,42 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:green_taxi/core/constant/app_colors.dart';
+import 'package:green_taxi/core/constant/app_text_style.dart';
+import 'package:green_taxi/core/helper/location_helper.dart';
+import 'package:green_taxi/core/widget/custom_circle_indicator.dart';
 import 'package:green_taxi/provider/map_provider/map_provider.dart';
 
-class BuildMap extends ConsumerStatefulWidget {
+final myLocationProvider = FutureProvider<Position>((ref) async {
+  ref.read(mapProvider.notifier).changeMapStyle();
+  return LocationHelper.myCurrentLocation();
+});
+
+class BuildMap extends ConsumerWidget {
   const BuildMap({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _BuildMapState();
-}
-
-class _BuildMapState extends ConsumerState<BuildMap> {
-  String? _mapStyle;
-  static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
-  @override
-  void initState() {
-    super.initState();
-
-    rootBundle.loadString('assets/map_style.txt').then((string) {
-      _mapStyle = string;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.read(mapProvider.notifier);
-
-    return GoogleMap(
-      zoomControlsEnabled: false,
-      initialCameraPosition: _kGooglePlex,
-      onMapCreated: (GoogleMapController controller) {
-        provider.mapController.complete(controller);
-        controller.setMapStyle(_mapStyle);
-      },
-    );
+    return ref.watch(myLocationProvider).when(
+          data: (data) => GoogleMap(
+            zoomControlsEnabled: false,
+            myLocationEnabled: true,
+            initialCameraPosition: CameraPosition(
+                target: LatLng(data.latitude, data.longitude), zoom: 17),
+            onMapCreated: (GoogleMapController controller) {
+              provider.mapController.complete(controller);
+              controller.setMapStyle(provider.mapStyle);
+            },
+          ),
+          loading: () => const CustomCircleIndicator(color: AppColors.green),
+          error: (error, _) => Center(
+            child: Text(
+              error.toString(),
+              style: AppTextStyle.poppinsRegular14.copyWith(color: Colors.red),
+            ),
+          ),
+        );
   }
 }
