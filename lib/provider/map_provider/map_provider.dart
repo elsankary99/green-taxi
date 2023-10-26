@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -15,16 +14,17 @@ final mapProvider =
 class MapProvider extends StateNotifier<MapState> {
   MapProvider() : super(MapInitial());
   String? mapStyle;
+  Set<Marker> markers = <Marker>{};
   FloatingSearchBarController controller = FloatingSearchBarController();
 
   Completer<GoogleMapController> mapController =
       Completer<GoogleMapController>();
-  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
 //?====================================
   Future<void> moveToMyCurrentLocation() async {
     final position = await LocationHelper.myCurrentLocation();
     GoogleMapController controller = await mapController.future;
+    state = MoveToMyLocation();
     await controller.animateCamera(CameraUpdate.newCameraPosition(
         CameraPosition(
             target: LatLng(position.latitude, position.longitude), zoom: 17)));

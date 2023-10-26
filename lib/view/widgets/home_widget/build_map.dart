@@ -19,10 +19,12 @@ class BuildMap extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.read(mapProvider.notifier);
+    ref.watch(mapProvider);
     return ref.watch(myLocationProvider).when(
           data: (data) => GoogleMap(
             zoomControlsEnabled: false,
             myLocationEnabled: true,
+            markers: provider.markers,
             initialCameraPosition: CameraPosition(
                 target: LatLng(data.latitude, data.longitude), zoom: 17),
             onMapCreated: (GoogleMapController controller) {

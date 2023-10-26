@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:green_taxi/core/extension/emdia_query.dart';
-import 'package:green_taxi/provider/map_provider/map_provider.dart';
 import 'package:green_taxi/view/widgets/home_widget/bottom_home_widget.dart';
 import 'package:green_taxi/view/widgets/home_widget/bottom_sheet_icon.dart';
 import 'package:green_taxi/view/widgets/home_widget/build_map.dart';
@@ -16,10 +15,8 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = ref.read(mapProvider.notifier);
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      key: provider.scaffoldKey,
       drawer: const HomeDrawerWidget(),
       body: Stack(
         fit: StackFit.expand,
