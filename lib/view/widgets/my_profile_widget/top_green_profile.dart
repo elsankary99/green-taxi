@@ -10,7 +10,9 @@ import 'package:green_taxi/view/widgets/otp_widget/custom_back_button.dart';
 class TopGreenProfile extends StatelessWidget {
   const TopGreenProfile({
     super.key,
+    required this.imageUrl,
   });
+  final String imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,9 @@ class TopGreenProfile extends StatelessWidget {
               top: context.height * 0.075,
               left: context.width * 0.05,
               child: const CustomBackButton()),
-          const MyProfileImage()
+          MyProfileImage(
+            imageUrl: imageUrl,
+          )
         ],
       ),
     );

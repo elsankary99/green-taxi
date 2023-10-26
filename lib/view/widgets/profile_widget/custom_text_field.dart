@@ -10,10 +10,12 @@ class CustomTextField extends StatelessWidget {
     required this.title,
     required this.icon,
     this.onSaved,
+    this.controller,
   });
   final String title;
   final IconData icon;
   final void Function(String?)? onSaved;
+  final TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -25,6 +27,7 @@ class CustomTextField extends StatelessWidget {
         ),
         SizedBox(height: 2.h),
         TextFormField(
+          controller: controller,
           validator: (value) {
             if (value!.trim().isEmpty) {
               return AppStrings.fieldRequired;

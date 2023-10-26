@@ -6,21 +6,20 @@ import 'package:green_taxi/core/extension/emdia_query.dart';
 import 'package:green_taxi/core/router/app_router.dart';
 import 'package:green_taxi/core/widget/custom_circle_indicator.dart';
 import 'package:green_taxi/core/widget/custom_toast.dart';
+import 'package:green_taxi/data/model/user_model/user_model.dart';
 import 'package:green_taxi/provider/profile_provider/profile_provider.dart';
-import 'package:green_taxi/provider/uplead_image_provider/upload_image_provider.dart';
+import 'package:green_taxi/view/widgets/my_profile_widget/my_profile_form.dart';
 import 'package:green_taxi/view/widgets/my_profile_widget/top_green_profile.dart';
 import 'package:green_taxi/view/widgets/profile_widget/custom_button.dart';
-import 'package:green_taxi/view/widgets/profile_widget/profile_form.dart';
 
 @RoutePage()
 class MyProfilePage extends ConsumerWidget {
-  const MyProfilePage({super.key});
-
+  const MyProfilePage({this.data, super.key});
+  final UserModel? data;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final imageProvider = ref.read(uploadImageProvider.notifier);
-    final provider = ref.read(profileProvider.notifier);
     final state = ref.watch(profileProvider);
+
     ref.listen(
       profileProvider,
       (previous, next) {
@@ -41,19 +40,16 @@ class MyProfilePage extends ConsumerWidget {
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
-          const SliverToBoxAdapter(child: TopGreenProfile()),
+          SliverToBoxAdapter(child: TopGreenProfile(imageUrl: data!.imageUrl!)),
           SliverToBoxAdapter(child: SizedBox(height: context.height * 0.03)),
-          const SliverToBoxAdapter(child: ProfileForm()),
+          SliverToBoxAdapter(child: MyProfileForm(data: data!)),
           SliverToBoxAdapter(
               child: state is ProfileLoading
                   ? const CustomCircleIndicator(
                       color: AppColors.green,
                     )
                   : CustomButton(
-                      onPressed: () async {
-                        provider.imageUrl = imageProvider.imageUrl;
-                        await provider.addingUserData();
-                      },
+                      onPressed: () async {},
                     )),
           SliverToBoxAdapter(child: SizedBox(height: context.height * 0.04))
         ],

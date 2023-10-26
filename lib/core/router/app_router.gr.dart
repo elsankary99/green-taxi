@@ -28,9 +28,14 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     MyProfileRoute.name: (routeData) {
+      final args = routeData.argsAs<MyProfileRouteArgs>(
+          orElse: () => const MyProfileRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const MyProfilePage(),
+        child: MyProfilePage(
+          data: args.data,
+          key: args.key,
+        ),
       );
     },
     OTPRoute.name: (routeData) {
@@ -84,16 +89,40 @@ class LoginRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [MyProfilePage]
-class MyProfileRoute extends PageRouteInfo<void> {
-  const MyProfileRoute({List<PageRouteInfo>? children})
-      : super(
+class MyProfileRoute extends PageRouteInfo<MyProfileRouteArgs> {
+  MyProfileRoute({
+    UserModel? data,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           MyProfileRoute.name,
+          args: MyProfileRouteArgs(
+            data: data,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'MyProfileRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<MyProfileRouteArgs> page =
+      PageInfo<MyProfileRouteArgs>(name);
+}
+
+class MyProfileRouteArgs {
+  const MyProfileRouteArgs({
+    this.data,
+    this.key,
+  });
+
+  final UserModel? data;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'MyProfileRouteArgs{data: $data, key: $key}';
+  }
 }
 
 /// generated route for

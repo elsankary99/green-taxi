@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+import 'package:green_taxi/data/model/user_model/user_model.dart';
 import 'package:green_taxi/view/pages/home/home_page.dart';
 import 'package:green_taxi/view/pages/login/login_page.dart';
 import 'package:green_taxi/view/pages/my_profile/my_profile_page.dart';

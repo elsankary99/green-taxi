@@ -4,14 +4,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:green_taxi/core/constant/app_strings.dart';
 import 'package:green_taxi/core/extension/emdia_query.dart';
+import 'package:green_taxi/data/model/user_model/user_model.dart';
 import 'package:green_taxi/provider/profile_provider/profile_provider.dart';
 import 'package:green_taxi/view/widgets/profile_widget/custom_text_field.dart';
 
-class ProfileSettingForm extends ConsumerWidget {
-  const ProfileSettingForm({
+class MyProfileForm extends ConsumerWidget {
+  const MyProfileForm({
+    required this.data,
     super.key,
   });
-
+  final UserModel data;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.read(profileProvider.notifier);
@@ -22,24 +24,28 @@ class ProfileSettingForm extends ConsumerWidget {
           child: Column(
             children: [
               CustomTextField(
+                  controller: TextEditingController(text: data.name),
                   onSaved: (name) {
                     provider.name = name;
                   },
                   icon: FontAwesomeIcons.solidUser,
                   title: AppStrings.name),
               CustomTextField(
+                  controller: TextEditingController(text: data.homeAddress),
                   onSaved: (homeAddress) {
                     provider.homeAddress = homeAddress;
                   },
                   icon: FontAwesomeIcons.house,
                   title: AppStrings.homeAddress),
               CustomTextField(
+                  controller: TextEditingController(text: data.businessAddress),
                   onSaved: (businessAddress) {
                     provider.businessAddress = businessAddress;
                   },
                   icon: FontAwesomeIcons.briefcase,
                   title: AppStrings.businessAddress),
               CustomTextField(
+                  controller: TextEditingController(text: data.shoppingCenter),
                   onSaved: (shoppingCenter) {
                     provider.shoppingCenter = shoppingCenter;
                   },

@@ -13,7 +13,7 @@ final getUserDataProvider = FutureProvider<UserModel>((ref) async {
   // final uid = FirebaseAuth.instance.currentUser!.uid;
   final user = await FirebaseFirestore.instance
       .collection('users')
-      .doc("wVUePRhgfdctKXZNjJrB4c020P83")
+      .doc("54asdsad35sdasca3sd54")
       .get();
   final data = user.data();
   return UserModel.fromJson(data!);

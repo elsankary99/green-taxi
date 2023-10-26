@@ -1,10 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:green_taxi/core/constant/app_colors.dart';
 import 'package:green_taxi/core/extension/emdia_query.dart';
-import 'package:green_taxi/core/widget/custom_circle_indicator.dart';
 import 'package:green_taxi/core/widget/custom_dialog.dart';
 import 'package:green_taxi/core/widget/custom_toast.dart';
 import 'package:green_taxi/provider/uplead_image_provider/upload_image_provider.dart';
@@ -12,13 +10,14 @@ import 'package:image_picker/image_picker.dart';
 
 class MyProfileImage extends ConsumerWidget {
   const MyProfileImage({
+    required this.imageUrl,
     super.key,
   });
+  final String imageUrl;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.read(uploadImageProvider.notifier);
-    final state = ref.watch(uploadImageProvider);
     ref.listen(
       uploadImageProvider,
       (previous, next) {
@@ -60,22 +59,19 @@ class MyProfileImage extends ConsumerWidget {
                   )
                 ],
                 shape: BoxShape.circle,
-                image: provider.file != null
-                    ? DecorationImage(
-                        image: NetworkImage(provider.imageUrl!),
-                        fit: BoxFit.cover)
-                    : null),
-            child: state is UploadImageLoading
-                ? const CustomCircleIndicator(
-                    color: AppColors.green,
-                  )
-                : provider.file == null
-                    ? Icon(
-                        Icons.camera_alt_outlined,
-                        color: AppColors.white,
-                        size: 35.sp,
-                      )
-                    : null,
+                image: DecorationImage(
+                    image: NetworkImage(imageUrl), fit: BoxFit.cover)),
+            // child: state is UploadImageLoading
+            //     ? const CustomCircleIndicator(
+            //         color: AppColors.green,
+            //       )
+            //     : provider.file == null
+            //         ? Icon(
+            //             Icons.camera_alt_outlined,
+            //             color: AppColors.white,
+            //             size: 35.sp,
+            //           )
+            //         : null,
           )),
     );
   }

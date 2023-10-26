@@ -43,7 +43,7 @@ class ProfileSettingPage extends ConsumerWidget {
         slivers: [
           const SliverToBoxAdapter(child: TopGreenWidget()),
           SliverToBoxAdapter(child: SizedBox(height: context.height * 0.03)),
-          const SliverToBoxAdapter(child: ProfileForm()),
+          const SliverToBoxAdapter(child: ProfileSettingForm()),
           SliverToBoxAdapter(
               child: state is ProfileLoading
                   ? const CustomCircleIndicator(
