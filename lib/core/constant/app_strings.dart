@@ -28,5 +28,16 @@ class AppStrings {
       enterOtp = 'Enter your OTP code below',
       resendCode = 'Resend code in',
       searchForDestination = 'Search for a destination',
+      paymentHistory = 'Payment History',
+      rideHistory = 'Ride History',
+      inviteFriends = 'Invite Friends',
+      promoCodes = 'Promo Codes',
+      settings = 'Settings',
+      logOut = "Log Out",
+      support = 'Support',
+      doMore = 'Do more',
+      getFoodDelivery = 'Get food delivery',
+      makeMoneyDriving = 'Make money driving',
+      rateUsOnStore = 'Rate us on store',
       seconds = 'seconds';
 }

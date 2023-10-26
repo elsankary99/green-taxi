@@ -23,7 +23,7 @@ class DrawerHeaderWidget extends ConsumerWidget {
               context.router.push(MyProfileRoute(data: data));
             },
             child: Padding(
-              padding: EdgeInsets.only(left: 16.w, top: 50.h, bottom: 10.h),
+              padding: EdgeInsets.only(left: 24.w, top: 50.h, bottom: 10.h),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -43,7 +43,8 @@ class DrawerHeaderWidget extends ConsumerWidget {
                     children: [
                       Text(AppStrings.goodMorning,
                           style: AppTextStyle.poppinsRegular12),
-                      Text(data.name!, style: AppTextStyle.poppinsBold20),
+                      Text(data.name!,
+                          maxLines: 1, style: AppTextStyle.poppinsBold20),
                     ],
                   )
                 ],
