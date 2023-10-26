@@ -2,6 +2,8 @@ class AppStrings {
   static const apiKey = "AIzaSyBlDiz9uyftnzTJHC7WzOBsmGwIrvvTC4M",
       autoCompleteUrl =
           "https://maps.googleapis.com/maps/api/place/autocomplete/json",
+      placeDetailsUrl =
+          "https://maps.googleapis.com/maps/api/place/details/json",
       helloNiceToMeetYou = 'Hello, nice to meet you!',
       getMovingWithGreenTaxi = 'Get moving with Green Taxi',
       pleaseEnterYourPhoneErr = "Please Enter your Phone Number",

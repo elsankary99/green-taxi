@@ -92,15 +92,22 @@ class SearchForLocation extends ConsumerWidget {
   }
 }
 
-class SearchedPlaceWidget extends StatelessWidget {
+class SearchedPlaceWidget extends ConsumerWidget {
   const SearchedPlaceWidget({
     super.key,
     required this.data,
   });
   final AutoCompleteModel data;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final provider = ref.read(mapProvider.notifier);
     return ListTile(
+      onTap: () async {
+        provider.controller.close();
+        provider.markers.clear();
+        await provider.getPlaceDetails(
+            placeName: data.description!, placeId: data.placeId!);
+      },
       title: Text(
         data.description!,
         style: AppTextStyle.poppinsBold14,

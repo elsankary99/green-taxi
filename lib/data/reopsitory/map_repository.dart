@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:green_taxi/core/constant/app_strings.dart';
 import 'package:green_taxi/data/model/auto_complete_model/auto_complete_model.dart';
+import 'package:green_taxi/data/model/place_details_model/place_details_model.dart';
 
 final mapRepositoryProvider = Provider<MapRepository>((ref) {
   return MapRepository();
@@ -24,5 +25,21 @@ class MapRepository {
     );
     final data = response.data["predictions"] as List;
     return data.map((e) => AutoCompleteModel.fromJson(e)).toList();
+  }
+
+  //?  placeDetails(2)
+  Future<PlaceDetailsModel> placeDetails(
+      {required String placeId, required String sessiontoken}) async {
+    final response = await dio.get(
+      AppStrings.placeDetailsUrl,
+      queryParameters: {
+        "place_id": placeId,
+        "fields": "geometry",
+        "sessiontoken": sessiontoken,
+        "key": AppStrings.apiKey
+      },
+    );
+    final data = response.data["result"] as Map<String, dynamic>;
+    return PlaceDetailsModel.fromJson(data);
   }
 }

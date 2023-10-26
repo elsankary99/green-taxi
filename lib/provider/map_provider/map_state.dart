@@ -16,3 +16,15 @@ class MapError extends MapState {
 }
 
 class MoveToMyLocation extends MapState {}
+
+class MarkerAdded extends MapState {}
+
+//*==Place Details==
+class PlaceDetailsLoading extends MapState {}
+
+class PlaceDetailsSuccess extends MapState {}
+
+class PlaceDetailsError extends MapState {
+  final String message;
+  const PlaceDetailsError(this.message);
+}
