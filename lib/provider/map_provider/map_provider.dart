@@ -5,6 +5,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:green_taxi/core/constant/app_colors.dart';
 import 'package:green_taxi/core/constant/app_images.dart';
 import 'package:green_taxi/core/helper/location_helper.dart';
 import 'package:green_taxi/data/reopsitory/map_repository.dart';
@@ -23,6 +24,7 @@ class MapProvider extends StateNotifier<MapState> {
   final MapRepository repo;
   String? mapStyle;
   Set<Marker> markers = <Marker>{};
+  Set<Polyline> polylines = <Polyline>{};
   FloatingSearchBarController controller = FloatingSearchBarController();
 
   Completer<GoogleMapController> mapController =
@@ -61,8 +63,10 @@ class MapProvider extends StateNotifier<MapState> {
       final target = LatLng(position.lat!, position.lng!);
 
       await moveCameraPosition(target: target);
+
       await addMarker(
           placeName: placeName, markerId: "marker1", position: target);
+      await createPolyLine(target);
       state = PlaceDetailsSuccess();
     } catch (e) {
       log("Error :${e.toString()}");
@@ -105,5 +109,14 @@ class MapProvider extends StateNotifier<MapState> {
     return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
         .buffer
         .asUint8List();
+  }
+
+  //*========Draw Polyline=======
+  Future<void> createPolyLine(LatLng latLng) async {
+    final location = await LocationHelper.myCurrentLocation();
+    polylines.add(Polyline(
+        polylineId: const PolylineId("Polyline1"),
+        color: AppColors.green,
+        points: [LatLng(location.latitude, location.longitude), latLng]));
   }
 }
