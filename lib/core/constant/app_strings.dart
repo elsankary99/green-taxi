@@ -4,6 +4,8 @@ class AppStrings {
           "https://maps.googleapis.com/maps/api/place/autocomplete/json",
       placeDetailsUrl =
           "https://maps.googleapis.com/maps/api/place/details/json",
+      placeDirectionUrl =
+          "https://maps.googleapis.com/maps/api/directions/json",
       helloNiceToMeetYou = 'Hello, nice to meet you!',
       getMovingWithGreenTaxi = 'Get moving with Green Taxi',
       pleaseEnterYourPhoneErr = "Please Enter your Phone Number",
