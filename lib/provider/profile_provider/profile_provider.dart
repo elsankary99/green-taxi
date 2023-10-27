@@ -30,6 +30,7 @@ class ProfileProvider extends StateNotifier<ProfileState> {
   String? businessAddress;
   String? shoppingCenter;
   GlobalKey<FormState> profileFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> updateProfileFormKey = GlobalKey<FormState>();
   CollectionReference users = FirebaseFirestore.instance.collection('users');
 
   Future<void> addingUserData() async {
@@ -53,6 +54,36 @@ class ProfileProvider extends StateNotifier<ProfileState> {
         } catch (e) {
           state = ProfileError(e.toString());
           log("Profile ${e.toString()}");
+        }
+      } else {
+        state = NullImage();
+      }
+    }
+  }
+
+//! UP Date
+  Future<void> updatingUserData() async {
+    if (updateProfileFormKey.currentState!.validate()) {
+      if (imageUrl != null) {
+        updateProfileFormKey.currentState!.save();
+        state = UpdateProfileLoading();
+        log("UpdateProfileLoading");
+        try {
+          //TODO: add UId FirebaseAuth.instance.currentUser!.uid
+          await users.doc("54asdsad35sdasca3sd54").update(
+            {
+              "image_url": imageUrl,
+              "name": name,
+              "home_address": homeAddress,
+              "business_address": businessAddress,
+              "shopping_center": shoppingCenter,
+            },
+          );
+          log("UpdateProfileSuccessfully");
+          state = UpdateProfileSuccessfully();
+        } catch (e) {
+          state = UpdateProfileError(e.toString());
+          log("UpdateProfileError ${e.toString()}");
         }
       } else {
         state = NullImage();

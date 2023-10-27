@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:green_taxi/core/constant/app_colors.dart';
 import 'package:green_taxi/core/extension/emdia_query.dart';
+import 'package:green_taxi/core/widget/custom_circle_indicator.dart';
 import 'package:green_taxi/core/widget/custom_dialog.dart';
 import 'package:green_taxi/core/widget/custom_toast.dart';
 import 'package:green_taxi/provider/uplead_image_provider/upload_image_provider.dart';
@@ -18,6 +19,7 @@ class MyProfileImage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.read(uploadImageProvider.notifier);
+    final state = ref.watch(uploadImageProvider);
     ref.listen(
       uploadImageProvider,
       (previous, next) {
@@ -60,18 +62,13 @@ class MyProfileImage extends ConsumerWidget {
                 ],
                 shape: BoxShape.circle,
                 image: DecorationImage(
-                    image: NetworkImage(imageUrl), fit: BoxFit.cover)),
-            // child: state is UploadImageLoading
-            //     ? const CustomCircleIndicator(
-            //         color: AppColors.green,
-            //       )
-            //     : provider.file == null
-            //         ? Icon(
-            //             Icons.camera_alt_outlined,
-            //             color: AppColors.white,
-            //             size: 35.sp,
-            //           )
-            //         : null,
+                    image: NetworkImage(provider.imageUrl ?? imageUrl),
+                    fit: BoxFit.cover)),
+            child: state is UploadImageLoading
+                ? const CustomCircleIndicator(
+                    color: AppColors.green,
+                  )
+                : null,
           )),
     );
   }

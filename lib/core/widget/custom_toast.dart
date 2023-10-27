@@ -16,7 +16,7 @@ class Toast {
     showTopSnackBar(
       Overlay.of(context),
       snackBarPosition: SnackBarPosition.bottom,
-      CustomSnackBar.success(message: message),
+      CustomSnackBar.error(message: message),
     );
   }
 

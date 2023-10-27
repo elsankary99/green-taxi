@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:green_taxi/core/constant/app_colors.dart';
+import 'package:green_taxi/core/constant/app_strings.dart';
 import 'package:green_taxi/core/extension/emdia_query.dart';
 import 'package:green_taxi/core/router/app_router.dart';
 import 'package:green_taxi/core/widget/custom_circle_indicator.dart';
@@ -27,9 +28,9 @@ class ProfileSettingPage extends ConsumerWidget {
         if (next is ProfileError) {
           Toast.errorToast(context, message: next.message);
         }
-        if (next is NullImage) {
-          Toast.errorToast(context, message: "Please Enter Your Profile Image");
-        }
+        // if (next is NullImage) {
+        //   Toast.errorToast(context, message: "Please Enter Your Profile Image");
+        // }
         if (next is ProfileAddedSuccessfully) {
           context.router.replace(const HomeRoute());
           Toast.successToast(context, message: "Successfully Added");
@@ -50,6 +51,7 @@ class ProfileSettingPage extends ConsumerWidget {
                       color: AppColors.green,
                     )
                   : CustomButton(
+                      title: AppStrings.submit,
                       onPressed: () async {
                         provider.imageUrl = imageProvider.imageUrl;
                         await provider.addingUserData();

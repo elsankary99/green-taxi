@@ -20,6 +20,7 @@ class AppStrings {
       businessAddress = 'Business Address',
       shoppingCenter = 'Shopping Center',
       submit = 'Submit',
+      update = 'Update',
       and = ' and ',
       profileSettings = 'Profile Settings',
       myProfile = 'My Profile',
