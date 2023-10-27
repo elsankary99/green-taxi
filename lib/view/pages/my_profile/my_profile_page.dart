@@ -54,7 +54,6 @@ class MyProfilePage extends ConsumerWidget {
                   : CustomButton(
                       title: AppStrings.update,
                       onPressed: () async {
-                        // provider.imageUrl = data!.imageUrl;
                         provider.imageUrl =
                             imageProvider.imageUrl ?? data!.imageUrl;
                         await provider.updatingUserData();

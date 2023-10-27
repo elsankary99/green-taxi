@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:ui' as ui;
 
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:green_taxi/core/constant/app_images.dart';
 import 'package:green_taxi/core/helper/location_helper.dart';
 import 'package:green_taxi/data/reopsitory/map_repository.dart';
 import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
@@ -57,8 +59,10 @@ class MapProvider extends StateNotifier<MapState> {
           await repo.placeDetails(placeId: placeId, sessiontoken: sessiontoken);
       final position = data.geometry!.location!;
       final target = LatLng(position.lat!, position.lng!);
-      addMarker(placeName: placeName, markerId: "marker1", position: target);
+
       await moveCameraPosition(target: target);
+      await addMarker(
+          placeName: placeName, markerId: "marker1", position: target);
       state = PlaceDetailsSuccess();
     } catch (e) {
       log("Error :${e.toString()}");
@@ -76,15 +80,30 @@ class MapProvider extends StateNotifier<MapState> {
     );
   }
 
-  void addMarker(
+  Future<void> addMarker(
       {required String placeName,
       required String markerId,
-      required LatLng position}) {
+      required LatLng position}) async {
+    final Uint8List markIcons =
+        await getImages(Assets.assetsImagesDestMarker, 100);
+
     markers.add(Marker(
         markerId: MarkerId(markerId),
         position: position,
+        icon: BitmapDescriptor.fromBytes(markIcons),
         infoWindow: InfoWindow(title: placeName)));
     log("MarkerAdded");
     state = MarkerAdded();
+  }
+
+//!(Create Custom Marker)
+  Future<Uint8List> getImages(String path, int width) async {
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
+        targetHeight: width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
+        .buffer
+        .asUint8List();
   }
 }
