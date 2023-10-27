@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 import 'dart:ui' as ui;
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,6 +25,7 @@ class MapProvider extends StateNotifier<MapState> {
   final MapRepository repo;
   String? mapStyle;
   Set<Marker> markers = <Marker>{};
+
   Set<Polyline> polylines = <Polyline>{};
   FloatingSearchBarController controller = FloatingSearchBarController();
 
@@ -50,7 +52,24 @@ class MapProvider extends StateNotifier<MapState> {
     });
   }
 
-//*====================================
+//*==================GetPlaceDirection==================
+  Future<void> getPlaceDirection(LatLng destination) async {
+    final origin = await LocationHelper.myCurrentLocation();
+
+    final data = await repo.placeDirection(
+        destination: destination,
+        origin: LatLng(origin.latitude, origin.longitude));
+
+    List<PointLatLng> result =
+        PolylinePoints().decodePolyline(data.overviewPolyline!.points!);
+    List<LatLng> placeDirection =
+        result.map((e) => LatLng(e.latitude, e.longitude)).toList();
+    createPolyLine(placeDirection);
+
+    log("PolyPoints: $result");
+  }
+
+//*==================GetPlaceDetails==================
   Future<void> getPlaceDetails(
       {required String placeId, required String placeName}) async {
     state = PlaceDetailsLoading();
@@ -61,12 +80,12 @@ class MapProvider extends StateNotifier<MapState> {
           await repo.placeDetails(placeId: placeId, sessiontoken: sessiontoken);
       final position = data.geometry!.location!;
       final target = LatLng(position.lat!, position.lng!);
-
       await moveCameraPosition(target: target);
 
       await addMarker(
           placeName: placeName, markerId: "marker1", position: target);
-      await createPolyLine(target);
+      await getPlaceDirection(target);
+
       state = PlaceDetailsSuccess();
     } catch (e) {
       log("Error :${e.toString()}");
@@ -112,11 +131,10 @@ class MapProvider extends StateNotifier<MapState> {
   }
 
   //*========Draw Polyline=======
-  Future<void> createPolyLine(LatLng latLng) async {
-    final location = await LocationHelper.myCurrentLocation();
+  void createPolyLine(List<LatLng> placeDirection) async {
     polylines.add(Polyline(
         polylineId: const PolylineId("Polyline1"),
         color: AppColors.green,
-        points: [LatLng(location.latitude, location.longitude), latLng]));
+        points: placeDirection));
   }
 }
