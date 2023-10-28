@@ -6,7 +6,9 @@ import 'package:green_taxi/core/extension/emdia_query.dart';
 import 'package:green_taxi/view/widgets/otp_widget/custom_back_button.dart';
 
 class TopGreenMask extends StatelessWidget {
-  const TopGreenMask({super.key, required this.title});
+  const TopGreenMask({super.key, required this.title, this.onTap});
+
+  final void Function()? onTap;
   final String title;
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,9 @@ class TopGreenMask extends StatelessWidget {
           Positioned(
               top: context.height * 0.075,
               left: context.width * 0.05,
-              child: const CustomBackButton()),
+              child: CustomBackButton(
+                onTap: onTap,
+              )),
         ],
       ),
     );

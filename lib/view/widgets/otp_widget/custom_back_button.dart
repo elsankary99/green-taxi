@@ -6,14 +6,16 @@ import 'package:green_taxi/core/constant/app_colors.dart';
 class CustomBackButton extends StatelessWidget {
   const CustomBackButton({
     super.key,
+    this.onTap,
   });
-
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () {
-          context.router.pop();
-        },
+        onTap: onTap ??
+            () {
+              context.router.pop();
+            },
         child: CircleAvatar(
           radius: 22.r,
           backgroundColor: AppColors.white,

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
@@ -53,6 +55,7 @@ class PaymentCardProvider extends StateNotifier<PaymentCardState> {
           },
         );
         state = AddCardSuccess();
+        resetValues();
       } catch (e) {
         state = AddCardError(e.toString());
       }
@@ -66,5 +69,13 @@ class PaymentCardProvider extends StateNotifier<PaymentCardState> {
     cvvCode = creditCardModel.cvvCode;
     isCvvFocused = creditCardModel.isCvvFocused;
     state = OnCreditCardModelChange();
+  }
+
+  resetValues() {
+    log("resetValues");
+    cardNumber = '';
+    expiryDate = '';
+    cardHolderName = '';
+    cvvCode = '';
   }
 }

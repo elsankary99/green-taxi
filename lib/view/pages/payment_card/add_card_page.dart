@@ -13,19 +13,28 @@ class AddCardPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final provider = ref.read(paymentCardProvider.notifier);
     ref.listen(paymentCardProvider, (previous, next) {
       if (next is AddCardError) {
         Toast.errorToast(context, message: next.message);
       }
       if (next is AddCardSuccess) {
+        ref.invalidate(getPaymentCardsProvider);
         Toast.successToast(context, message: "Payment Card Successfully Added");
+        context.router.pop();
       }
     });
-    return const Scaffold(
+    return Scaffold(
       body: Stack(
         children: [
-          TopGreenMask(title: AppStrings.addCreditCard),
-          AddCardWidget()
+          TopGreenMask(
+            title: AppStrings.addCreditCard,
+            onTap: () {
+              context.router.pop();
+              provider.resetValues();
+            },
+          ),
+          const AddCardWidget()
         ],
       ),
     );
