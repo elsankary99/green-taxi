@@ -5,6 +5,8 @@ import 'package:green_taxi/view/pages/home/home_page.dart';
 import 'package:green_taxi/view/pages/login/login_page.dart';
 import 'package:green_taxi/view/pages/my_profile/my_profile_page.dart';
 import 'package:green_taxi/view/pages/otp/otp_page.dart';
+import 'package:green_taxi/view/pages/payment_card/add_card_page.dart';
+import 'package:green_taxi/view/pages/payment_card/my_cards_page.dart';
 import 'package:green_taxi/view/pages/profile_setting/profile_setting_page.dart';
 import 'package:green_taxi/view/pages/splash/splash_page.dart';
 
@@ -19,8 +21,10 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: SplashRoute.page),
         AutoRoute(page: LoginRoute.page),
         AutoRoute(page: OTPRoute.page),
-        AutoRoute(page: HomeRoute.page, initial: true),
         AutoRoute(page: ProfileSettingRoute.page),
+        AutoRoute(page: HomeRoute.page, initial: true),
         AutoRoute(page: MyProfileRoute.page),
+        AutoRoute(page: MyCardsRoute.page),
+        AutoRoute(page: AddCardRoute.page),
       ];
 }
