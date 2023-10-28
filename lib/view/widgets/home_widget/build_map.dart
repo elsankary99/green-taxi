@@ -24,7 +24,7 @@ class BuildMap extends ConsumerWidget {
           data: (data) => GoogleMap(
             zoomControlsEnabled: false,
             myLocationEnabled: true,
-            polylines: provider.polylines,
+            polylines: provider.showRoad ? provider.polylines : {},
             markers: provider.markers,
             initialCameraPosition: CameraPosition(
                 target: LatLng(data.latitude, data.longitude), zoom: 17),

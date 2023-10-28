@@ -1,16 +1,20 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:green_taxi/core/constant/app_colors.dart';
 import 'package:green_taxi/core/extension/emdia_query.dart';
+import 'package:green_taxi/provider/map_provider/map_provider.dart';
 import 'package:green_taxi/view/widgets/home_widget/avilabel_driver_bottom_sheet.dart';
 
-class BottomSheetIcon extends StatelessWidget {
+class BottomSheetIcon extends ConsumerWidget {
   const BottomSheetIcon({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final provider = ref.read(mapProvider.notifier);
+    ref.watch(mapProvider);
     return Align(
       alignment: Alignment.bottomCenter,
       child: GestureDetector(
@@ -36,7 +40,7 @@ class BottomSheetIcon extends StatelessWidget {
               child: Container(
             height: context.height * 0.005,
             width: context.width * 0.3,
-            color: AppColors.light,
+            color: provider.showRoad ? AppColors.green : AppColors.light,
           )),
         ),
       ),

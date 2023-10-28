@@ -25,8 +25,8 @@ class MapProvider extends StateNotifier<MapState> {
   final MapRepository repo;
   String? mapStyle;
   Set<Marker> markers = <Marker>{};
-
   Set<Polyline> polylines = <Polyline>{};
+  bool showRoad = false;
   FloatingSearchBarController controller = FloatingSearchBarController();
 
   Completer<GoogleMapController> mapController =
@@ -72,6 +72,7 @@ class MapProvider extends StateNotifier<MapState> {
 //*==================GetPlaceDetails==================
   Future<void> getPlaceDetails(
       {required String placeId, required String placeName}) async {
+    showRoad = false;
     state = PlaceDetailsLoading();
     try {
       final sessiontoken = const Uuid().v4();
@@ -113,6 +114,10 @@ class MapProvider extends StateNotifier<MapState> {
     markers.add(Marker(
         markerId: MarkerId(markerId),
         position: position,
+        onTap: () {
+          showRoad = true;
+          state = ShowRoad();
+        },
         icon: BitmapDescriptor.fromBytes(markIcons),
         infoWindow: InfoWindow(title: placeName)));
     log("MarkerAdded");

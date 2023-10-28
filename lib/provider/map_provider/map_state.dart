@@ -19,6 +19,8 @@ class MoveToMyLocation extends MapState {}
 
 class MarkerAdded extends MapState {}
 
+class ShowRoad extends MapState {}
+
 //*==Place Details==
 class PlaceDetailsLoading extends MapState {}
 

@@ -105,6 +105,7 @@ class SearchedPlaceWidget extends ConsumerWidget {
       onTap: () async {
         provider.controller.close();
         provider.markers.clear();
+
         await provider.getPlaceDetails(
             placeName: data.description!, placeId: data.placeId!);
       },
