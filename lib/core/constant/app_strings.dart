@@ -27,6 +27,7 @@ class AppStrings {
       update = 'Update',
       and = ' and ',
       myCards = 'My Cards',
+      addCreditCard = 'Add Credit Card',
       addNewCard = 'Add New Card',
       profileSettings = 'Profile Settings',
       myProfile = 'My Profile',

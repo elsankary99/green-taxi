@@ -15,3 +15,5 @@ class AddCardError extends PaymentCardState {
   final String message;
   const AddCardError(this.message);
 }
+
+class OnCreditCardModelChange extends PaymentCardState {}
