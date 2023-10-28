@@ -135,6 +135,7 @@ class MapProvider extends StateNotifier<MapState> {
     polylines.add(Polyline(
         polylineId: const PolylineId("Polyline1"),
         color: AppColors.green,
+        width: 5,
         points: placeDirection));
   }
 }

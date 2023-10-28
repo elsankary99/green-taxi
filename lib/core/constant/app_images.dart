@@ -1,6 +1,10 @@
 class Assets {
   Assets._();
   
+  /// Assets for assetsImagesCar
+  /// assets/images/car.png
+  static const String assetsImagesCar = "assets/images/car.png";
+
   /// Assets for assetsImagesCustomer
   /// assets/images/customer.png
   static const String assetsImagesCustomer = "assets/images/customer.png";
@@ -29,17 +33,9 @@ class Assets {
   /// assets/images/leaf_icon.svg
   static const String assetsImagesLeafIcon = "assets/images/leaf_icon.svg";
 
-  /// Assets for assetsImagesMapStyle
-  /// assets/images/map_style.txt
-  static const String assetsImagesMapStyle = "assets/images/map_style.txt";
-
   /// Assets for assetsImagesMask
   /// assets/images/mask.png
   static const String assetsImagesMask = "assets/images/mask.png";
-
-  /// Assets for assetsImagesMaskGroup2
-  /// assets/images/mask_group_2.png
-  static const String assetsImagesMaskGroup2 = "assets/images/mask_group_2.png";
 
   /// Assets for assetsImagesPerson
   /// assets/images/person.png
