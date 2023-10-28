@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:green_taxi/core/constant/app_strings.dart';
+import 'package:green_taxi/core/router/app_router.dart';
 import 'package:green_taxi/view/widgets/home_widget/drawer_item.dart';
 
 class DrawerBody extends StatelessWidget {
@@ -9,7 +11,11 @@ class DrawerBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        DrawerItem(title: AppStrings.paymentHistory, onTap: () {}),
+        DrawerItem(
+            title: AppStrings.paymentHistory,
+            onTap: () {
+              context.router.push(const MyCardsRoute());
+            }),
         DrawerItem(title: AppStrings.rideHistory, onTap: () {}, title2: "2"),
         DrawerItem(title: AppStrings.inviteFriends, onTap: () {}),
         DrawerItem(title: AppStrings.promoCodes, onTap: () {}),

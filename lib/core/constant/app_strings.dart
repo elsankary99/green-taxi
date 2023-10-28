@@ -26,6 +26,8 @@ class AppStrings {
       submit = 'Submit',
       update = 'Update',
       and = ' and ',
+      myCards = 'My Cards',
+      addNewCard = 'Add New Card',
       profileSettings = 'Profile Settings',
       myProfile = 'My Profile',
       privacyPolicy = 'Privacy Policy',

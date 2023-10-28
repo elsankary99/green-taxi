@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:green_taxi/core/constant/app_colors.dart';
 import 'package:green_taxi/core/constant/app_images.dart';
-import 'package:green_taxi/core/constant/app_strings.dart';
 import 'package:green_taxi/core/constant/app_text_style.dart';
 import 'package:green_taxi/core/extension/emdia_query.dart';
 import 'package:green_taxi/view/widgets/otp_widget/custom_back_button.dart';
@@ -25,7 +24,7 @@ class TopGreenMask extends StatelessWidget {
             child: Column(children: [
               SizedBox(height: context.height * 0.08),
               Text(
-                AppStrings.myProfile,
+                title,
                 style:
                     AppTextStyle.poppinsBold24.copyWith(color: AppColors.white),
               )
