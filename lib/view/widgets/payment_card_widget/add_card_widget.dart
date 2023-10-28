@@ -3,6 +3,7 @@ import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:green_taxi/core/constant/app_colors.dart';
+import 'package:green_taxi/core/widget/custom_circle_indicator.dart';
 import 'package:green_taxi/provider/payment_card_provider/payment_card_provider.dart';
 
 class AddCardWidget extends ConsumerWidget {
@@ -11,7 +12,7 @@ class AddCardWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final provider = ref.read(paymentCardProvider.notifier);
-    ref.watch(paymentCardProvider);
+    final state = ref.watch(paymentCardProvider);
     return Column(
       children: [
         SizedBox(height: 150.h),
@@ -68,30 +69,34 @@ class AddCardWidget extends ConsumerWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
+                state is AddCardLoading
+                    ? const CustomCircleIndicator(
+                        color: AppColors.green,
+                      )
+                    : ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            backgroundColor: AppColors.green
+                            // backgroundColor: const Color(0xff1b447b),
+                            ),
+                        child: Container(
+                          margin: const EdgeInsets.all(12),
+                          child: const Text(
+                            'Save',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'halter',
+                              fontSize: 14,
+                              package: 'flutter_credit_card',
+                            ),
+                          ),
+                        ),
+                        onPressed: () async {
+                          await provider.addUserCard();
+                        },
                       ),
-                      backgroundColor: AppColors.green
-                      // backgroundColor: const Color(0xff1b447b),
-                      ),
-                  child: Container(
-                    margin: const EdgeInsets.all(12),
-                    child: const Text(
-                      'Save',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'halter',
-                        fontSize: 14,
-                        package: 'flutter_credit_card',
-                      ),
-                    ),
-                  ),
-                  onPressed: () async {
-                    await provider.addUserCard();
-                  },
-                ),
                 SizedBox(height: 20.h)
               ],
             ),
