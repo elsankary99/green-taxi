@@ -26,10 +26,11 @@ class BottomSheetIcon extends ConsumerWidget {
           width: context.width * 0.65,
           decoration: BoxDecoration(
               color: AppColors.white,
-              boxShadow: const [
+              boxShadow: [
                 BoxShadow(
-                  color: AppColors.grey,
-                  blurRadius: 2,
+                  color: provider.showRoad ? AppColors.green : AppColors.grey,
+                  blurRadius: 5,
+                  spreadRadius: -2,
                   blurStyle: BlurStyle.outer,
                 )
               ],
