@@ -37,8 +37,7 @@ class UploadImageProvider extends StateNotifier<UploadImageState> {
     try {
       final storageRef = FirebaseStorage.instance
           .ref("users_images")
-          //TODO:Add UId FirebaseAuth.instance.currentUser!.uid
-          .child("54asdsad35sdasca3sd54");
+          .child(FirebaseAuth.instance.currentUser!.uid);
 
       await storageRef.putFile(file!);
       imageUrl = await storageRef.getDownloadURL();

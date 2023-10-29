@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,7 +13,7 @@ final getPaymentCardsProvider =
     FutureProvider<List<PaymentCardModel>>((ref) async {
   CollectionReference paymentCard = FirebaseFirestore.instance
       .collection('users')
-      .doc("54asdsad35sdasca3sd54")
+      .doc(FirebaseAuth.instance.currentUser!.uid)
       .collection("payment_cards");
   final res = await paymentCard.get();
   final data = res.docs;
@@ -36,10 +37,9 @@ class PaymentCardProvider extends StateNotifier<PaymentCardState> {
   bool isCvvFocused = false;
   bool useGlassMorphism = false;
   bool useBackgroundImage = false;
-  //TODO: add UId
   CollectionReference paymentCard = FirebaseFirestore.instance
       .collection('users')
-      .doc("54asdsad35sdasca3sd54")
+      .doc(FirebaseAuth.instance.currentUser!.uid)
       .collection("payment_cards");
 
   Future<void> addUserCard() async {

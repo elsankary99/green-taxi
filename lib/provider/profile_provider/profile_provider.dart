@@ -9,11 +9,9 @@ import 'package:green_taxi/data/model/user_model/user_model.dart';
 part 'profile_state.dart';
 
 final getUserDataProvider = FutureProvider<UserModel>((ref) async {
-  //TODO: add uid
-  // final uid = FirebaseAuth.instance.currentUser!.uid;
   final user = await FirebaseFirestore.instance
       .collection('users')
-      .doc("54asdsad35sdasca3sd54")
+      .doc(FirebaseAuth.instance.currentUser!.uid)
       .get();
   final data = user.data();
   return UserModel.fromJson(data!);
@@ -69,8 +67,7 @@ class ProfileProvider extends StateNotifier<ProfileState> {
         state = UpdateProfileLoading();
         log("UpdateProfileLoading");
         try {
-          //TODO: add UId FirebaseAuth.instance.currentUser!.uid
-          await users.doc("54asdsad35sdasca3sd54").update(
+          await users.doc(FirebaseAuth.instance.currentUser!.uid).update(
             {
               "image_url": imageUrl,
               "name": name,
