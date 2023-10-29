@@ -55,7 +55,8 @@ Future<void> showMyDialog(BuildContext context,
                           )),
                       child: Text(
                         btnTitle,
-                        style: AppTextStyle.poppinsRegular14,
+                        style: AppTextStyle.poppinsBold14
+                            .copyWith(color: AppColors.white),
                       )),
                 ),
               ],

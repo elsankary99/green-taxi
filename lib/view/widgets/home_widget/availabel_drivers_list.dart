@@ -34,7 +34,7 @@ class AvailableDriverList extends ConsumerWidget {
               itemBuilder: (context, index) {
                 return GestureDetector(
                     onTap: () {
-                      provider.d(index);
+                      provider.selectDriver(index);
                     },
                     child: DriverCard(
                       index: index,

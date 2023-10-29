@@ -18,11 +18,11 @@ final router = AppRouter();
 class AppRouter extends _$AppRouter {
   @override
   List<AutoRoute> get routes => [
-        AutoRoute(page: SplashRoute.page),
+        AutoRoute(page: SplashRoute.page, initial: true),
         AutoRoute(page: LoginRoute.page),
         AutoRoute(page: OTPRoute.page),
         AutoRoute(page: ProfileSettingRoute.page),
-        AutoRoute(page: HomeRoute.page, initial: true),
+        AutoRoute(page: HomeRoute.page),
         AutoRoute(page: MyProfileRoute.page),
         AutoRoute(page: MyCardsRoute.page),
         AutoRoute(page: AddCardRoute.page),

@@ -7,9 +7,14 @@ final driverProvider = ChangeNotifierProvider<DriverNotifier>((ref) {
 
 class DriverNotifier extends ChangeNotifier {
   int driverIndex = 0;
-
-  d(int index) {
+  String? selectedCard;
+  selectDriver(int index) {
     driverIndex = index;
+    notifyListeners();
+  }
+
+  selectPaymentCard(String value) {
+    selectedCard = value;
     notifyListeners();
   }
 }

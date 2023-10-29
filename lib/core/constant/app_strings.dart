@@ -41,6 +41,7 @@ class AppStrings {
       inviteFriends = 'Invite Friends',
       promoCodes = 'Promo Codes',
       settings = 'Settings',
+      sureLogOut = 'Are you sure you want to log out?',
       logOut = "Log Out",
       support = 'Support',
       doMore = 'Do more',

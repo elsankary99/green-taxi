@@ -6,6 +6,8 @@ abstract class LoginState {
 
 class LoginInitial extends LoginState {}
 
+class UserLogOut extends LoginState {}
+
 class LoginLoading extends LoginState {}
 
 class OtpLoading extends LoginState {}
