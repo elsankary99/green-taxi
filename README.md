@@ -17,6 +17,6 @@ Green Taxi is a mobile application built using Flutter, Dart, and Firebase. The 
   - **Riverpod:** As State Mangement.
   - **Auto Route:** Facilitates automatic screen navigation.
   - **Image Picker:** Allows easy selection and uploading of images.
-  - *
+  - **Responsive UI:** Designs a user interface that is responsive and works well on various devices.
 
 ![Picsart_23-11-13_13-09-01-615](https://github.com/elsankary99/green-taxi/assets/65948188/c5960326-d974-4fa2-8700-8292b3d7eabf)
